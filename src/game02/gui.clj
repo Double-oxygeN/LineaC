@@ -210,7 +210,7 @@
 (defn game-play
   "fpsを引数にとって，ゲームを開始する関数"
   [fps]
-  (let [frame (JFrame. "TITLE")
+  (let [frame (JFrame. "LineaC")
         panel (game-panel fps)
         timer (Timer. (int (/ 1000 fps)) panel)]
     (doto panel

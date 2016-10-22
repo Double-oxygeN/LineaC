@@ -1,28 +1,15 @@
-# game02
+# LineaC
 
-FIXME: description
+Clojure sample game
 
-## Installation
-
-Download from http://example.com/FIXME.
+操作は十字キーのみ！
+迫り来る壁をひたすら避けて高得点を目指そう！
 
 ## Usage
 
-FIXME: explanation
-
     $ java -jar game02-0.1.0-standalone.jar [args]
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
 ### Bugs
-
-...
 
 ### Any Other Sections
 ### That You Think
@@ -30,7 +17,7 @@ FIXME: listing of options this app accepts.
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2016 Double_oxygeN
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
