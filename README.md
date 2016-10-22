@@ -7,7 +7,7 @@ Clojure sample game
 
 ## Usage
 
-    $ java -jar game02-0.9.0-standalone.jar [args]
+    $ java -jar lineac-0.9.0-standalone.jar [args]
 
 ### Bugs
 
