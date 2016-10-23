@@ -3,6 +3,8 @@
 
 (def key-convert {37 :left 38 :up 39 :right 40 :down})
 
+(def wall-max {:normal 3 :hard 5 :extreme 7})
+
 (defn difficulty-change
   [key current-diff]
   (case [key current-diff]
@@ -11,8 +13,6 @@
     [:down :hard] :normal
     [:down :extreme] :hard
     current-diff))
-
-(def wall-max {:normal 3 :hard 5 :extreme 7})
 
 (defn next-wall-create
   [current-wall difficulty]

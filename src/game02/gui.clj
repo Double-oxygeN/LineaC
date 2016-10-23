@@ -11,7 +11,7 @@
     (.getImage (io/resource "logo.png"))))
 
 (defn paint-title
-  [g difficulty observer]
+  [g _ _ _ difficulty _ _ _ _ _ observer]
   (doto g
     (.drawImage image01 250 100 100 100 observer)
     (.setColor Color/green)
@@ -26,7 +26,7 @@
     (.fillPolygon g (int-array [270 330 300]) (int-array [520 520 550]) 3)))
 
 (defn paint-pre-game
-  [g fps w h c difficulty observer]
+  [g fps w h difficulty _ _ _ _ c observer]
   (let [alpha (- 1.0 (float (/ (abs (- c fps)) (inc fps))))]
     (if (< c fps)
       (doto g
@@ -54,7 +54,7 @@
       (if-not (zero? (nth bs i)) (.fillRect g (+ (* 70 i) (start-x difficulty)) y 70 5)))))
 
 (defn paint-game
-  [g fps difficulty score player-x walls counter distance observer]
+  [g fps _ _ difficulty score player-x walls distance counter observer]
   (.setColor g Color/yellow)
   (doseq [line-num (range 4)]
     (drawWall g (nth walls line-num) (+ (* -4 distance) (* (- 3 line-num) distance) (int (* (rem counter fps) distance (/ 1 fps))) 800) difficulty))
@@ -65,7 +65,7 @@
     (.drawString (str score) 260 220)))
 
 (defn paint-pre-result
-  [g fps w h difficulty score player-x walls counter distance observer]
+  [g fps w h difficulty score player-x walls distance counter observer]
   (let [alpha (float (/ counter (* fps 3.3)))]
     (.setColor g Color/yellow)
     (doseq [line-num (range 4)]
@@ -81,7 +81,7 @@
       (.fillRect 0 0 w h))))
 
 (defn paint-result
-  [g score]
+  [g _ _ _ _ score _ _ _ _ _]
   (doto g
     (.setColor Color/green)
     (.setFont (Font. "Menlo" Font/PLAIN 42))
@@ -91,7 +91,7 @@
     (.drawString "<< TITLE" 130 650)))
 
 (defn paint-pre-success
-  [g fps w h difficulty score player-x counter observer]
+  [g fps w h difficulty score player-x _ _ counter observer]
   (let [alpha (float (/ counter (* fps 4.2)))]
     (doto g
       (.drawImage image01 (+ 265 (* player-x 70)) (- 700 (* counter 10)) 70 70 observer)
@@ -104,7 +104,7 @@
       (.fillRect 0 0 w h))))
 
 (defn paint-success
-  [g score]
+  [g _ _ _ _ score _ _ _ _ _]
   (doto g
     (.setColor Color/green)
     (.setFont (Font. "Menlo" Font/PLAIN 42))

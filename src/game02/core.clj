@@ -17,32 +17,31 @@
         score (ref 0)
         player-x (atom 0)
         walls (ref [0 0 0 0])
-        distanceB2Wall (ref 200)
+        distance (ref 200)
         counter (ref 0)
         key (atom :none)]
     (proxy [JPanel ActionListener KeyListener] []
       (paintComponent [g]
-        (doto g
-          (.setColor Color/black)
-          (.fillRect 0 0 panel-width panel-height))
-        (case @mode
-          :title (gui/paint-title g @difficulty this)
-          :pre-game (gui/paint-pre-game g fps panel-width panel-height @counter @difficulty this)
-          :game (gui/paint-game g fps @difficulty @score @player-x @walls @counter @distanceB2Wall this)
-          :pre-result (gui/paint-pre-result g fps panel-width panel-height @difficulty @score @player-x @walls @counter @distanceB2Wall this)
-          :result (gui/paint-result g @score)
-          :pre-success (gui/paint-pre-success g fps panel-width panel-height @difficulty @score @player-x @counter this)
-          :success (gui/paint-success g @score)
-          nil))
+        (let [paint-of {:title gui/paint-title
+                        :pre-game gui/paint-pre-game
+                        :game gui/paint-game
+                        :pre-result gui/paint-pre-result
+                        :result gui/paint-result
+                        :pre-success gui/paint-pre-success
+                        :success gui/paint-success}]
+          (doto g
+            (.setColor Color/black)
+            (.fillRect 0 0 panel-width panel-height))
+          ((paint-of @mode) g fps panel-width panel-height @difficulty @score @player-x @walls @distance @counter this)))
       (actionPerformed [e]
         (case @mode
           :title (ac/action-title mode difficulty key counter)
           :pre-game (if (> @counter (* fps 2)) (dosync (ref-set mode :game) (ref-set counter 0)))
-          :game (ac/action-game fps mode key @difficulty score player-x counter walls distanceB2Wall)
+          :game (ac/action-game fps mode key @difficulty score player-x counter walls distance)
           :pre-result (if (> @counter (* fps 3.2)) (dosync (ref-set mode :result) (ref-set counter 0) (ref-set walls [0 0 0 0])))
-          :result (ac/action-result mode key counter score player-x distanceB2Wall)
+          :result (ac/action-result mode key counter score player-x distance)
           :pre-success (if (> @counter (* fps 4)) (dosync (ref-set mode :success) (ref-set counter 0) (ref-set walls [0 0 0 0])))
-          :success (ac/action-result mode key counter score player-x distanceB2Wall)
+          :success (ac/action-result mode key counter score player-x distance)
           nil)
         (.repaint this)
         (dosync (alter counter inc))
@@ -76,4 +75,4 @@
 
 (defn -main
   [& args]
-  (game-play 30))
+  (game-play 60))

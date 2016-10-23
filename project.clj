@@ -1,4 +1,4 @@
-(defproject game02 "0.9.1"
+(defproject game02 "0.9.2"
   :description "LineaC : game sample"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
