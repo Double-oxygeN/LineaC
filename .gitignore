@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+/music
 pom.xml
 pom.xml.asc
 *.class
