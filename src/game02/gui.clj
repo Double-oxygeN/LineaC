@@ -69,7 +69,7 @@
   (let [alpha (float (/ counter (* fps 3.3)))]
     (.setColor g Color/yellow)
     (doseq [line-num (range 4)]
-      (drawWall g (nth walls line-num) (+ (* -4 distance) (* (- 3 line-num) distance) (int (* distance 2/3)) 800) difficulty))
+      (drawWall g (nth walls line-num) (+ (* -4 distance) (* (- 3 line-num) distance) (int (- distance 100)) 800) difficulty))
     (doto g
       (.drawImage image01 (+ 265 (* player-x 70)) 700 70 70 observer)
       (.setColor (Color. 0.0 0.3 1.0 0.7))
